@@ -1,6 +1,6 @@
 ﻿namespace PostmanCloneUI
 {
-    partial class Form1
+    partial class Dashboard
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,10 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            SuspendLayout();
+            // 
+            // Dashboard
+            // 
+            AutoScaleDimensions = new SizeF(23F, 57F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1533, 855);
+            Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Margin = new Padding(6, 6, 6, 6);
+            Name = "Dashboard";
+            Text = "Postman Clone by Maikel Monet";
+            ResumeLayout(false);
         }
 
         #endregion
