@@ -1,9 +1,11 @@
-using System.Security.Policy;
+using PostmanCloneLibrary;
 
 namespace PostmanCloneUI;
 
 public partial class Dashboard : Form
 {
+    private readonly IApiAccess apiAccess = new ApiAccess();
+
     public Dashboard()
     {
         InitializeComponent();
@@ -11,36 +13,46 @@ public partial class Dashboard : Form
 
     private async void callApiButton_Click(object sender, EventArgs e)
     {
-        // TODO - push the user validation to the ClassLibrary eventually.
-
-        if (string.IsNullOrWhiteSpace(apiTextBox.Text) == false)
+        if (apiAccess.IsUrlValid(apiTextBox.Text))
         {
-            try
-            {
-                systemStatusLabel.Text = "Making Call ....";
 
-                await Task.Delay(2000);
+            systemStatusLabel.Text = "Invalid URL";
 
-                systemStatusLabel.Text = "Ready";
-
-            }
-            catch (Exception ex)
-            {
-
-                resultsTextBox.Text = $"The application has encountered the following error {ex.Message}";
-
-                systemStatusLabel.Text = "Error";
-
-            } 
-        }
-        else
-        {
             MessageBox.Show("You did not give a valid URL, try again",
-                            "Incomplete Url value!",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Asterisk);
+                               "incorrect Url value!",
+                               MessageBoxButtons.OK,
+                               MessageBoxIcon.Asterisk);
+
+
+            return;
         }
+        
+
+        try
+        {
+            systemStatusLabel.Text = "Making Call ....";
+
+
+            resultsTextBox.Text = await apiAccess.CallApiAsync(apiTextBox.Text);
+
+            systemStatusLabel.Text = "Ready";
+
+        }
+        catch (Exception ex)
+        {
+
+            resultsTextBox.Text = $"The application has encountered the following error {ex.Message}";
+
+            systemStatusLabel.Text = "Error";
+
+        }
+
+
 
     }
 
+    private void refreshButton_Click(object sender, EventArgs e)
+    {
+        resultsTextBox.Text = "";
+    }
 }

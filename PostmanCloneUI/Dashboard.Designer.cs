@@ -36,7 +36,7 @@
             resultsLabel = new Label();
             statusStrip1 = new StatusStrip();
             systemStatusLabel = new ToolStripStatusLabel();
-            systemStatusProgressBar = new ToolStripProgressBar();
+            refreshButton = new Button();
             statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -46,7 +46,7 @@
             formHeader.AutoSize = true;
             formHeader.BackColor = Color.Transparent;
             formHeader.Font = new Font("Segoe UI Black", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            formHeader.Location = new Point(332, 9);
+            formHeader.Location = new Point(313, 9);
             formHeader.Margin = new Padding(2, 0, 2, 0);
             formHeader.Name = "formHeader";
             formHeader.Size = new Size(254, 45);
@@ -59,7 +59,7 @@
             urlLabel.AutoSize = true;
             urlLabel.BackColor = Color.Transparent;
             urlLabel.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            urlLabel.Location = new Point(130, 76);
+            urlLabel.Location = new Point(111, 76);
             urlLabel.Margin = new Padding(2, 0, 2, 0);
             urlLabel.Name = "urlLabel";
             urlLabel.Size = new Size(61, 30);
@@ -70,7 +70,7 @@
             // apiTextBox
             // 
             apiTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            apiTextBox.Location = new Point(185, 75);
+            apiTextBox.Location = new Point(166, 75);
             apiTextBox.Margin = new Padding(2);
             apiTextBox.Name = "apiTextBox";
             apiTextBox.Size = new Size(429, 29);
@@ -84,7 +84,7 @@
             callApiButton.FlatAppearance.MouseOverBackColor = SystemColors.MenuHighlight;
             callApiButton.FlatStyle = FlatStyle.Flat;
             callApiButton.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            callApiButton.Location = new Point(618, 74);
+            callApiButton.Location = new Point(599, 74);
             callApiButton.Margin = new Padding(2);
             callApiButton.Name = "callApiButton";
             callApiButton.Size = new Size(103, 32);
@@ -97,13 +97,13 @@
             // 
             resultsTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             resultsTextBox.BackColor = SystemColors.Window;
-            resultsTextBox.Location = new Point(185, 153);
+            resultsTextBox.Location = new Point(166, 153);
             resultsTextBox.Margin = new Padding(2);
             resultsTextBox.Multiline = true;
             resultsTextBox.Name = "resultsTextBox";
             resultsTextBox.ReadOnly = true;
             resultsTextBox.ScrollBars = ScrollBars.Both;
-            resultsTextBox.Size = new Size(536, 304);
+            resultsTextBox.Size = new Size(536, 328);
             resultsTextBox.TabIndex = 4;
             // 
             // resultsLabel
@@ -111,7 +111,7 @@
             resultsLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             resultsLabel.AutoSize = true;
             resultsLabel.BackColor = Color.Transparent;
-            resultsLabel.Location = new Point(47, 156);
+            resultsLabel.Location = new Point(28, 156);
             resultsLabel.Margin = new Padding(2, 0, 2, 0);
             resultsLabel.Name = "resultsLabel";
             resultsLabel.Size = new Size(136, 21);
@@ -121,32 +121,45 @@
             // statusStrip1
             // 
             statusStrip1.BackColor = Color.DarkGray;
-            statusStrip1.Items.AddRange(new ToolStripItem[] { systemStatusLabel, systemStatusProgressBar });
-            statusStrip1.Location = new Point(0, 494);
+            statusStrip1.Items.AddRange(new ToolStripItem[] { systemStatusLabel });
+            statusStrip1.Location = new Point(0, 514);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(851, 22);
+            statusStrip1.Size = new Size(812, 26);
             statusStrip1.TabIndex = 7;
             statusStrip1.Text = "statusStrip";
             // 
             // systemStatusLabel
             // 
             systemStatusLabel.BackColor = Color.White;
-            systemStatusLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            systemStatusLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             systemStatusLabel.Name = "systemStatusLabel";
-            systemStatusLabel.Size = new Size(44, 17);
+            systemStatusLabel.Size = new Size(53, 21);
             systemStatusLabel.Text = "Ready";
             // 
-            // systemStatusProgressBar
+            // refreshButton
             // 
-            systemStatusProgressBar.Name = "systemStatusProgressBar";
-            systemStatusProgressBar.Size = new Size(100, 16);
+            refreshButton.Anchor = AnchorStyles.Top;
+            refreshButton.BackColor = SystemColors.ButtonShadow;
+            refreshButton.FlatAppearance.BorderColor = SystemColors.MenuHighlight;
+            refreshButton.FlatAppearance.MouseOverBackColor = SystemColors.MenuHighlight;
+            refreshButton.FlatStyle = FlatStyle.Flat;
+            refreshButton.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            refreshButton.Location = new Point(24, 296);
+            refreshButton.Margin = new Padding(2);
+            refreshButton.Name = "refreshButton";
+            refreshButton.Size = new Size(138, 32);
+            refreshButton.TabIndex = 8;
+            refreshButton.Text = "Clear Results";
+            refreshButton.UseVisualStyleBackColor = false;
+            refreshButton.Click += refreshButton_Click;
             // 
             // Dashboard
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightGray;
-            ClientSize = new Size(851, 516);
+            ClientSize = new Size(812, 540);
+            Controls.Add(refreshButton);
             Controls.Add(statusStrip1);
             Controls.Add(resultsLabel);
             Controls.Add(resultsTextBox);
@@ -174,6 +187,6 @@
         private Label resultsLabel;
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel systemStatusLabel;
-        private ToolStripProgressBar systemStatusProgressBar;
+        private Button refreshButton;
     }
 }
