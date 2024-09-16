@@ -11,11 +11,9 @@ namespace PostmanCloneLibrary
     {
         private readonly HttpClient httpClient = new();
 
-        public async Task<string> CallApiAsync(string url,
-                                               bool formatJson = true,
-                                               HttpAction action = HttpAction.GET)
+        public async Task<string> CallApiAsync(string url, bool formatJson = true, HttpAction action = HttpAction.GET)
         {
-            var apiResponse = await httpClient.GetAsync(url);
+            HttpResponseMessage apiResponse = await httpClient.GetAsync(url);
 
             if (apiResponse.IsSuccessStatusCode)
             {
@@ -23,7 +21,7 @@ namespace PostmanCloneLibrary
 
                 if (formatJson == true)
                 {
-                    var jsonElement = JsonSerializer.Deserialize<JsonElement>(json);
+                    JsonElement jsonElement = JsonSerializer.Deserialize<JsonElement>(json);
 
                     json = JsonSerializer.Serialize(jsonElement, new JsonSerializerOptions { WriteIndented = true });
 
@@ -43,9 +41,9 @@ namespace PostmanCloneLibrary
 
         public bool IsUrlValid(string url)
         {
-            if (string.IsNullOrWhiteSpace(url) == false)
+            if (string.IsNullOrWhiteSpace(url))
             {
-                return true;
+                return false;
             }
 
 

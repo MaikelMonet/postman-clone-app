@@ -13,7 +13,7 @@ public partial class Dashboard : Form
 
     private async void callApiButton_Click(object sender, EventArgs e)
     {
-        if (apiAccess.IsUrlValid(apiTextBox.Text))
+        if (apiAccess.IsUrlValid(apiTextBox.Text) == false)
         {
 
             systemStatusLabel.Text = "Invalid URL";
@@ -46,9 +46,6 @@ public partial class Dashboard : Form
             systemStatusLabel.Text = "Error";
 
         }
-
-
-
     }
 
     private void refreshButton_Click(object sender, EventArgs e)
