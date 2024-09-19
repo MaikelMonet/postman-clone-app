@@ -32,12 +32,18 @@
             urlLabel = new Label();
             apiTextBox = new TextBox();
             callApiButton = new Button();
-            resultsTextBox = new TextBox();
-            resultsLabel = new Label();
-            statusStrip1 = new StatusStrip();
+            statusStrip = new StatusStrip();
             systemStatusLabel = new ToolStripStatusLabel();
-            refreshButton = new Button();
-            statusStrip1.SuspendLayout();
+            actionDropDownList = new ComboBox();
+            callData = new TabControl();
+            bodyTab = new TabPage();
+            bodyTextBox = new TextBox();
+            outputTab = new TabPage();
+            outputTextBox = new TextBox();
+            statusStrip.SuspendLayout();
+            callData.SuspendLayout();
+            bodyTab.SuspendLayout();
+            outputTab.SuspendLayout();
             SuspendLayout();
             // 
             // formHeader
@@ -46,7 +52,7 @@
             formHeader.AutoSize = true;
             formHeader.BackColor = Color.Transparent;
             formHeader.Font = new Font("Segoe UI Black", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            formHeader.Location = new Point(313, 9);
+            formHeader.Location = new Point(347, 9);
             formHeader.Margin = new Padding(2, 0, 2, 0);
             formHeader.Name = "formHeader";
             formHeader.Size = new Size(254, 45);
@@ -59,7 +65,7 @@
             urlLabel.AutoSize = true;
             urlLabel.BackColor = Color.Transparent;
             urlLabel.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            urlLabel.Location = new Point(111, 76);
+            urlLabel.Location = new Point(68, 70);
             urlLabel.Margin = new Padding(2, 0, 2, 0);
             urlLabel.Name = "urlLabel";
             urlLabel.Size = new Size(61, 30);
@@ -70,7 +76,7 @@
             // apiTextBox
             // 
             apiTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            apiTextBox.Location = new Point(166, 75);
+            apiTextBox.Location = new Point(251, 72);
             apiTextBox.Margin = new Padding(2);
             apiTextBox.Name = "apiTextBox";
             apiTextBox.Size = new Size(429, 29);
@@ -84,7 +90,7 @@
             callApiButton.FlatAppearance.MouseOverBackColor = SystemColors.MenuHighlight;
             callApiButton.FlatStyle = FlatStyle.Flat;
             callApiButton.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            callApiButton.Location = new Point(599, 74);
+            callApiButton.Location = new Point(685, 71);
             callApiButton.Margin = new Padding(2);
             callApiButton.Name = "callApiButton";
             callApiButton.Size = new Size(103, 32);
@@ -93,76 +99,104 @@
             callApiButton.UseVisualStyleBackColor = false;
             callApiButton.Click += callApiButton_Click;
             // 
-            // resultsTextBox
+            // statusStrip
             // 
-            resultsTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            resultsTextBox.BackColor = SystemColors.Window;
-            resultsTextBox.Location = new Point(166, 153);
-            resultsTextBox.Margin = new Padding(2);
-            resultsTextBox.Multiline = true;
-            resultsTextBox.Name = "resultsTextBox";
-            resultsTextBox.ReadOnly = true;
-            resultsTextBox.ScrollBars = ScrollBars.Both;
-            resultsTextBox.Size = new Size(536, 328);
-            resultsTextBox.TabIndex = 4;
-            // 
-            // resultsLabel
-            // 
-            resultsLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            resultsLabel.AutoSize = true;
-            resultsLabel.BackColor = Color.Transparent;
-            resultsLabel.Location = new Point(28, 156);
-            resultsLabel.Margin = new Padding(2, 0, 2, 0);
-            resultsLabel.Name = "resultsLabel";
-            resultsLabel.Size = new Size(136, 21);
-            resultsLabel.TabIndex = 6;
-            resultsLabel.Text = "Incoming Results :";
-            // 
-            // statusStrip1
-            // 
-            statusStrip1.BackColor = Color.DarkGray;
-            statusStrip1.Items.AddRange(new ToolStripItem[] { systemStatusLabel });
-            statusStrip1.Location = new Point(0, 514);
-            statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(812, 26);
-            statusStrip1.TabIndex = 7;
-            statusStrip1.Text = "statusStrip";
+            statusStrip.BackColor = Color.DarkGray;
+            statusStrip.Items.AddRange(new ToolStripItem[] { systemStatusLabel });
+            statusStrip.Location = new Point(0, 817);
+            statusStrip.Name = "statusStrip";
+            statusStrip.Size = new Size(884, 43);
+            statusStrip.TabIndex = 7;
+            statusStrip.Text = "statusStrip";
             // 
             // systemStatusLabel
             // 
             systemStatusLabel.BackColor = Color.White;
-            systemStatusLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            systemStatusLabel.Font = new Font("Segoe UI", 21F, FontStyle.Regular, GraphicsUnit.Point, 0);
             systemStatusLabel.Name = "systemStatusLabel";
-            systemStatusLabel.Size = new Size(53, 21);
+            systemStatusLabel.Size = new Size(92, 38);
             systemStatusLabel.Text = "Ready";
             // 
-            // refreshButton
+            // actionDropDownList
             // 
-            refreshButton.Anchor = AnchorStyles.Top;
-            refreshButton.BackColor = SystemColors.ButtonShadow;
-            refreshButton.FlatAppearance.BorderColor = SystemColors.MenuHighlight;
-            refreshButton.FlatAppearance.MouseOverBackColor = SystemColors.MenuHighlight;
-            refreshButton.FlatStyle = FlatStyle.Flat;
-            refreshButton.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            refreshButton.Location = new Point(24, 296);
-            refreshButton.Margin = new Padding(2);
-            refreshButton.Name = "refreshButton";
-            refreshButton.Size = new Size(138, 32);
-            refreshButton.TabIndex = 8;
-            refreshButton.Text = "Clear Results";
-            refreshButton.UseVisualStyleBackColor = false;
-            refreshButton.Click += refreshButton_Click;
+            actionDropDownList.Anchor = AnchorStyles.Top;
+            actionDropDownList.DropDownStyle = ComboBoxStyle.DropDownList;
+            actionDropDownList.FormattingEnabled = true;
+            actionDropDownList.Items.AddRange(new object[] { "GET", "POST" });
+            actionDropDownList.Location = new Point(131, 71);
+            actionDropDownList.Name = "actionDropDownList";
+            actionDropDownList.Size = new Size(115, 29);
+            actionDropDownList.TabIndex = 9;
+            // 
+            // callData
+            // 
+            callData.Anchor = AnchorStyles.Top;
+            callData.Controls.Add(bodyTab);
+            callData.Controls.Add(outputTab);
+            callData.Location = new Point(127, 122);
+            callData.Name = "callData";
+            callData.SelectedIndex = 0;
+            callData.Size = new Size(661, 669);
+            callData.TabIndex = 10;
+            // 
+            // bodyTab
+            // 
+            bodyTab.Controls.Add(bodyTextBox);
+            bodyTab.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            bodyTab.Location = new Point(4, 30);
+            bodyTab.Name = "bodyTab";
+            bodyTab.Padding = new Padding(3);
+            bodyTab.Size = new Size(653, 635);
+            bodyTab.TabIndex = 0;
+            bodyTab.Text = "Body";
+            bodyTab.UseVisualStyleBackColor = true;
+            // 
+            // bodyTextBox
+            // 
+            bodyTextBox.BackColor = SystemColors.Window;
+            bodyTextBox.Dock = DockStyle.Fill;
+            bodyTextBox.Location = new Point(3, 3);
+            bodyTextBox.Margin = new Padding(2);
+            bodyTextBox.Multiline = true;
+            bodyTextBox.Name = "bodyTextBox";
+            bodyTextBox.ScrollBars = ScrollBars.Both;
+            bodyTextBox.Size = new Size(647, 629);
+            bodyTextBox.TabIndex = 6;
+            // 
+            // outputTab
+            // 
+            outputTab.Controls.Add(outputTextBox);
+            outputTab.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            outputTab.Location = new Point(4, 30);
+            outputTab.Name = "outputTab";
+            outputTab.Padding = new Padding(3);
+            outputTab.Size = new Size(653, 635);
+            outputTab.TabIndex = 1;
+            outputTab.Text = "Output";
+            outputTab.UseVisualStyleBackColor = true;
+            // 
+            // outputTextBox
+            // 
+            outputTextBox.BackColor = SystemColors.Window;
+            outputTextBox.Dock = DockStyle.Fill;
+            outputTextBox.Location = new Point(3, 3);
+            outputTextBox.Margin = new Padding(2);
+            outputTextBox.Multiline = true;
+            outputTextBox.Name = "outputTextBox";
+            outputTextBox.ReadOnly = true;
+            outputTextBox.ScrollBars = ScrollBars.Both;
+            outputTextBox.Size = new Size(647, 629);
+            outputTextBox.TabIndex = 5;
             // 
             // Dashboard
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightGray;
-            ClientSize = new Size(812, 540);
-            Controls.Add(refreshButton);
-            Controls.Add(statusStrip1);
-            Controls.Add(resultsLabel);
-            Controls.Add(resultsTextBox);
+            ClientSize = new Size(884, 860);
+            Controls.Add(callData);
+            Controls.Add(actionDropDownList);
+            Controls.Add(statusStrip);
             Controls.Add(callApiButton);
             Controls.Add(apiTextBox);
             Controls.Add(urlLabel);
@@ -171,8 +205,13 @@
             Margin = new Padding(4);
             Name = "Dashboard";
             Text = "Postman Clone Dashboard";
-            statusStrip1.ResumeLayout(false);
-            statusStrip1.PerformLayout();
+            statusStrip.ResumeLayout(false);
+            statusStrip.PerformLayout();
+            callData.ResumeLayout(false);
+            bodyTab.ResumeLayout(false);
+            bodyTab.PerformLayout();
+            outputTab.ResumeLayout(false);
+            outputTab.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -183,10 +222,13 @@
         private Label urlLabel;
         private TextBox apiTextBox;
         private Button callApiButton;
-        private TextBox resultsTextBox;
-        private Label resultsLabel;
-        private StatusStrip statusStrip1;
+        private StatusStrip statusStrip;
         private ToolStripStatusLabel systemStatusLabel;
-        private Button refreshButton;
+        private ComboBox actionDropDownList;
+        private TabControl callData;
+        private TabPage bodyTab;
+        private TabPage outputTab;
+        private TextBox outputTextBox;
+        private TextBox bodyTextBox;
     }
 }

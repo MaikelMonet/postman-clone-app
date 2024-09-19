@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Data;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace PostmanCloneLibrary
 {
@@ -11,24 +9,46 @@ namespace PostmanCloneLibrary
     {
         private readonly HttpClient httpClient = new();
 
-        public async Task<string> CallApiAsync(string url, bool formatJson = true, HttpAction action = HttpAction.GET)
+        public async Task<string> CallApiAsync(string url, string content, HttpAction action = HttpAction.GET, bool formatJson = true)
         {
-            HttpResponseMessage apiResponse = await httpClient.GetAsync(url);
 
-            if (apiResponse.IsSuccessStatusCode)
+            StringContent stringContent = new(content, Encoding.UTF8, "application/json");
+
+            return await CallApiAsync(url, stringContent, action, formatJson);
+        }
+
+        public async Task<string> CallApiAsync(string url, HttpContent? content = null ,HttpAction action = HttpAction.GET, bool formatJson = true)
+        {
+            HttpResponseMessage? apiResponse = null;
+
+            switch (action)
             {
-                string json = await apiResponse.Content.ReadAsStringAsync();
+                case HttpAction.GET:
+                    apiResponse = await httpClient.GetAsync(url);
+                    break;
+                case HttpAction.POST:
+                    apiResponse = await httpClient.PostAsync(url, content);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(); 
+                   
+            }
+
+
+            if (apiResponse!.IsSuccessStatusCode)
+            {
+               string response = await apiResponse.Content.ReadAsStringAsync();
 
                 if (formatJson == true)
                 {
-                    JsonElement jsonElement = JsonSerializer.Deserialize<JsonElement>(json);
+                    JsonElement jsonElement = JsonSerializer.Deserialize<JsonElement>(response);
 
-                    json = JsonSerializer.Serialize(jsonElement, new JsonSerializerOptions { WriteIndented = true });
+                    response = JsonSerializer.Serialize(jsonElement, new JsonSerializerOptions { WriteIndented = true });
 
                 }
 
 
-                return json;
+                return response;
 
             }
             else
