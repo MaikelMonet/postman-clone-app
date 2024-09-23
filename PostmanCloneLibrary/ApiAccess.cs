@@ -29,6 +29,15 @@ namespace PostmanCloneLibrary
                 case HttpAction.POST:
                     apiResponse = await httpClient.PostAsync(url, content);
                     break;
+                case HttpAction.PUT:
+                    apiResponse = await httpClient.PutAsync(url, content);
+                    break;
+                case HttpAction.PATCH:
+                    apiResponse = await httpClient.PatchAsync(url, content);
+                    break;
+                case HttpAction.DELETE:
+                    apiResponse = await httpClient.DeleteAsync(url);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(); 
                    
@@ -46,7 +55,6 @@ namespace PostmanCloneLibrary
                     response = JsonSerializer.Serialize(jsonElement, new JsonSerializerOptions { WriteIndented = true });
 
                 }
-
 
                 return response;
 

@@ -21,9 +21,7 @@ public partial class Dashboard : Form
             return;
         }
 
-        HttpAction selectedAction;
-
-        CheckSelectedActionIsValid(out selectedAction);
+        CheckSelectedActionIsValid(out HttpAction selectedAction);
 
         await MakeApiCall(selectedAction);
 

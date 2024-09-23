@@ -10,5 +10,8 @@ namespace PostmanCloneLibrary
     {
         GET,
         POST,
+        PUT,
+        PATCH,
+        DELETE
     }
 }

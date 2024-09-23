@@ -122,7 +122,7 @@
             actionDropDownList.Anchor = AnchorStyles.Top;
             actionDropDownList.DropDownStyle = ComboBoxStyle.DropDownList;
             actionDropDownList.FormattingEnabled = true;
-            actionDropDownList.Items.AddRange(new object[] { "GET", "POST" });
+            actionDropDownList.Items.AddRange(new object[] { "GET", "POST", "PUT", "PATCH", "DELETE" });
             actionDropDownList.Location = new Point(131, 71);
             actionDropDownList.Name = "actionDropDownList";
             actionDropDownList.Size = new Size(115, 29);
@@ -167,10 +167,10 @@
             // 
             outputTab.Controls.Add(outputTextBox);
             outputTab.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            outputTab.Location = new Point(4, 30);
+            outputTab.Location = new Point(4, 24);
             outputTab.Name = "outputTab";
             outputTab.Padding = new Padding(3);
-            outputTab.Size = new Size(653, 635);
+            outputTab.Size = new Size(653, 641);
             outputTab.TabIndex = 1;
             outputTab.Text = "Output";
             outputTab.UseVisualStyleBackColor = true;
@@ -185,7 +185,7 @@
             outputTextBox.Name = "outputTextBox";
             outputTextBox.ReadOnly = true;
             outputTextBox.ScrollBars = ScrollBars.Both;
-            outputTextBox.Size = new Size(647, 629);
+            outputTextBox.Size = new Size(647, 635);
             outputTextBox.TabIndex = 5;
             // 
             // Dashboard
